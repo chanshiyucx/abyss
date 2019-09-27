@@ -4,6 +4,7 @@
     <label :for="id">{{ label }}</label>
   </span>
 </template>
+
 <script>
 let GID = 1
 
@@ -20,6 +21,7 @@ export default {
   }
 }
 </script>
+
 <style lang="less">
 .login_checkbox {
   input {

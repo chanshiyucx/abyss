@@ -5,6 +5,7 @@
     <li><span>Sign in</span></li>
   </ul>
 </template>
+
 <style lang="less">
 .login_tabs {
   display: flex;
@@ -15,8 +16,8 @@
     flex: 1;
     justify-content: space-around;
     align-items: center;
-    transition: all 0.6s ease;
     padding: 10px;
+    transition: all 0.6s ease;
   }
 
   span {

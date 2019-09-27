@@ -24,6 +24,7 @@
     </div>
   </form>
 </template>
+
 <script>
 import LoginTextfield from './LoginTextfield'
 import LoginCheckbox from './LoginCheckbox'
@@ -37,6 +38,7 @@ export default {
   }
 }
 </script>
+
 <style lang="less">
 .login_form {
   padding: 20px;

@@ -4,6 +4,7 @@
     <input type="text" />
   </span>
 </template>
+
 <script>
 export default {
   props: {
@@ -16,6 +17,7 @@ export default {
   }
 }
 </script>
+
 <style lang="less">
 .login_textfield {
   flex: 1;
@@ -37,9 +39,9 @@ export default {
 
   input {
     flex: 1;
-    width: 0;
     margin: 0;
     padding: 0;
+    width: 0;
     border: none;
     outline: none;
   }

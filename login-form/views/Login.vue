@@ -4,6 +4,7 @@
     <LoginForm />
   </div>
 </template>
+
 <script>
 import LoginTabs from '../components/LoginTabs'
 import LoginForm from '../components/LoginForm'
@@ -31,6 +32,7 @@ export default {
   }
 }
 </script>
+
 <style lang="less">
 .login {
   width: 100%;

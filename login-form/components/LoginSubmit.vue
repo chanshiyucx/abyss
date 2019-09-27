@@ -5,6 +5,7 @@
     <label>Sign Up</label>
   </span>
 </template>
+
 <style lang="less">
 .login_button {
   position: relative;
@@ -20,7 +21,7 @@
     border: none;
     border-radius: 2px;
     outline: none;
-    background: #0066d0;
+    background-color: #0066d0;
   }
 
   label {
