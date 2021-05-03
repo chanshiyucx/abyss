@@ -1,0 +1,20 @@
+.App {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+section {
+  flex: 1;
+}
+
+section:nth-child(1) {
+  background-color: aliceblue;
+  border-right: 1px solid #ccc;
+}
+
+button {
+  margin: 6px;
+  padding: 6px 10px;
+}
