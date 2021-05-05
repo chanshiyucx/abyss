@@ -27,13 +27,19 @@ export type OTReturn = { hide: HideToastFunction };
 
 export type OTMethod = (message: string | ReactNode, options?: OTOptions) => OTReturn;
 
-export type OToast = OTMethod & {
-  success: OTMethod;
-  warn: OTMethod;
-  info: OTMethod;
-  error: OTMethod;
-  loading: OTMethod;
-};
+// 更高级的写法
+export type OToast = OTMethod &
+  {
+    [key in OTType]: OTMethod;
+  };
+
+// export type OToast = OTMethod & {
+//   success: OTMethod;
+//   warn: OTMethod;
+//   info: OTMethod;
+//   error: OTMethod;
+//   loading: OTMethod;
+// };
 
 declare namespace opxToast {
   const success: OTMethod;
