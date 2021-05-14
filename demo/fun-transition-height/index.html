@@ -58,7 +58,7 @@
         var targetHeight = window.getComputedStyle(element).height;
         element.style.height = height;
 
-        // 下面这句不能删，不然没有动画效果
+        // 下面触发浏览器重排，不然没有动画效果
         element.offsetWidth = element.offsetWidth;
         // 或者直接这样写也是可以的： element.offsetWidth;
 
