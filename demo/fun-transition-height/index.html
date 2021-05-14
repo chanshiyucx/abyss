@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>容器高度动态变化动画</title>
+    <style>
+      .box {
+        width: 400px;
+        padding: 20px;
+        border: 40px solid #a0b3d6;
+        background-color: #eee;
+        overflow: hidden;
+      }
+      .loading {
+        height: 100%;
+        background: url("./loading.gif") no-repeat center;
+      }
+      .in {
+        width: 100px;
+        margin: 0 auto;
+        border: 50px solid #beceeb;
+        background-color: #f0f3f9;
+      }
+      [type="button"] {
+        width: 100px;
+        height: 32px;
+        font-size: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box" class="box">...</div>
+    <p>
+      <input type="button" id="button" value="点击我" />
+    </p>
+    <script>
+      /**
+       *  ======================================================================
+       * 原文参考：内容loading加载后高度变化CSS3 transition体验优化
+       *  https://www.zhangxinxu.com/wordpress/2015/01/content-loading-height-change-css3-transition-better-experience/
+       * =======================================================================
+       * */
+
+      // 高度无缝动画方法
+      var funTransitionHeight = function (element, time) {
+        // time, 数值，可缺省
+        if (typeof window.getComputedStyle == "undefined") return;
+
+        var height = window.getComputedStyle(element).height;
+
+        // 本行2015-05-20新增，mac Safari下，貌似auto也会触发transition, 故要none下~
+        element.style.transition = "none";
+
+        element.style.height = "auto";
+        var targetHeight = window.getComputedStyle(element).height;
+        element.style.height = height;
+        element.offsetWidth = element.offsetWidth;
+
+        //如果 transition time 写在CSS中的，time参数可以不要
+        if (time) element.style.transition = "height " + time + "ms";
+        element.style.height = targetHeight;
+      };
+
+      // 以下为模拟内容动态加载测试
+      var box = document.getElementById("box");
+      var button = document.getElementById("button");
+
+      var loadingEl = document.createElement("div");
+      loadingEl.className = "loading";
+      var contentEl = document.createElement("div");
+      contentEl.className = "in";
+
+      var timer = null;
+      button.onclick = function () {
+        if (timer) return;
+        if (box.contains(contentEl)) {
+          box.removeChild(contentEl);
+        }
+
+        box.appendChild(loadingEl);
+
+        timer = setTimeout(function () {
+          var height = Math.round(Math.random() * 300 + 100) + "px";
+          contentEl.style.height = height;
+          box.removeChild(loadingEl);
+          box.appendChild(contentEl);
+
+          funTransitionHeight(box, 250);
+          timer = null;
+        }, 1000);
+      };
+      funTransitionHeight(box);
+    </script>
+  </body>
+</html>

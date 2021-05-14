@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { shape, number } from 'prop-types';
 
-import { OTType } from './type';
+import { CTType } from './types';
 import Toast from './Toast';
 
 const camelCase = (str: string) => str.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
@@ -15,8 +15,8 @@ const defaultToasts = {
   bottomRight: [],
 };
 
-type OToastItem = {
-  type: OTType;
+type CToastItem = {
+  type: CTType;
   id: number;
   message: string;
   duration: number;
@@ -24,7 +24,7 @@ type OToastItem = {
   onHide: any;
 };
 
-type OToastContainerProps = Partial<{
+type CToastContainerProps = Partial<{
   toast: {
     position?: string;
     onHide?: Function;
@@ -32,7 +32,7 @@ type OToastContainerProps = Partial<{
   hiddenID: number;
 }>;
 
-const ToastContainer: React.FC<OToastContainerProps> = ({ toast, hiddenID }) => {
+const ToastContainer: React.FC<CToastContainerProps> = ({ toast, hiddenID }) => {
   const [allToasts, setToasts] = useState(defaultToasts);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const ToastContainer: React.FC<OToastContainerProps> = ({ toast, hiddenID }) => 
       const toastPosition = camelCase(position ?? 'top-center');
       return {
         ...prevToasts,
-        [toastPosition]: prevToasts[toastPosition].filter((item: OToastItem) => item.id !== id),
+        [toastPosition]: prevToasts[toastPosition].filter((item: CToastItem) => item.id !== id),
       };
     });
     toast?.onHide?.();
@@ -61,13 +61,13 @@ const ToastContainer: React.FC<OToastContainerProps> = ({ toast, hiddenID }) => 
   return (
     <>
       {rows.map((row) => (
-        <div key={`row_${row}`} className="ot-row">
+        <div key={`row_${row}`} className="ct-row">
           {groups.map((group) => {
             const type = `${row}${group}`;
-            const className = ['ot-group', row === 'bottom' ? 'ot-flex-bottom' : ''].join(' ');
+            const className = ['ct-group', row === 'bottom' ? 'ct-flex-bottom' : ''].join(' ');
             return (
               <div key={type} className={className}>
-                {allToasts[type].map((item: OToastItem) => (
+                {allToasts[type].map((item: CToastItem) => (
                   <Toast key={`${type}_${item.id}`} show={hiddenID !== item.id} {...item} onHide={handleRemove} />
                 ))}
               </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import opxToast from './components';
+import opxToast from './components/CogoToast';
 
 const types = ['success', 'info', 'loading', 'warn', 'error'];
 
@@ -28,14 +28,21 @@ function App() {
   return (
     <div className="App">
       <section>
-        {types.map((type) => (
-          <button key={type} className={type} onClick={() => showMessage(type)}>
-            {type}
+        <h3>
+          <a href="https://github.com/Cogoport/cogo-toast" rel="noopener nofollow">
+            cogo-toast
+          </a>
+        </h3>
+        <div>
+          {types.map((type) => (
+            <button key={type} className={type} onClick={() => showMessage(type)}>
+              {type}
+            </button>
+          ))}
+          <button className="primary" onClick={showAll}>
+            Show All
           </button>
-        ))}
-        <button className="primary" onClick={showAll}>
-          Show All
-        </button>
+        </div>
       </section>
     </div>
   );

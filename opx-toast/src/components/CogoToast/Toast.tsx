@@ -2,7 +2,7 @@ import React, { useState, useEffect, ReactNode } from 'react';
 import { string, number, bool, func, shape, node, oneOf, oneOfType } from 'prop-types';
 
 import Icons from './Icons';
-import { OTType, OTPosition, OTOptions } from './type';
+import { CTType, CTPosition, CTOptions } from './types';
 
 const colors = {
   success: '#6EC05F',
@@ -12,29 +12,41 @@ const colors = {
   loading: '#0088ff',
 };
 
-type OToastProps = OTOptions & {
+type CToastProps = CTOptions & {
   show: boolean;
   id: number;
   message: string | ReactNode;
 };
 
-const Toast: React.FC<OToastProps> = (props) => {
-  const type = props.type ?? 'success';
-  const place = (props.position ?? 'top-center').includes('bottom') ? 'Bottom' : 'Top';
+const Toast: React.FC<CToastProps> = ({
+  show = true,
+  message,
+  type = 'success',
+  position = 'top-center',
+  id,
+  role,
+  duration = 3000,
+  heading,
+  bar,
+  renderIcon,
+  onClick,
+  onHide,
+}) => {
+  const place = position.includes('bottom') ? 'Bottom' : 'Top';
   const marginType = `margin${place}`;
-  const className = ['ot-toast', `ot-toast-${type}`, props.onClick ? ' ot-cursor-pointer' : ''].join(' ');
+  const className = ['ct-toast', `ct-toast-${type}`, onClick ? ' ct-cursor-pointer' : ''].join(' ');
   const borderLeft = `
-    ${props.bar?.size ?? '3px'} 
-    ${props.bar?.style ?? 'solid'} 
-    ${props.bar?.color ?? colors[type]}
+    ${bar?.size ?? '3px'} 
+    ${bar?.style ?? 'solid'} 
+    ${bar?.color ?? colors[type]}
   `;
   const CurrentIcon = Icons[type];
 
   const [animStyles, setAnimStyles]: [any, Function] = useState({ opacity: 0, [marginType]: '-15px' });
 
   const style = {
-    paddingLeft: props.heading ? '25px' : undefined,
-    minHeight: props.heading ? '50px' : undefined,
+    paddingLeft: heading ? '25px' : undefined,
+    minHeight: heading ? '50px' : undefined,
     borderLeft,
     ...animStyles,
   };
@@ -42,7 +54,7 @@ const Toast: React.FC<OToastProps> = (props) => {
   const handleHide = () => {
     setAnimStyles({ opacity: 0, [marginType]: '-15px' });
     setTimeout(() => {
-      props.onHide?.(props.id, props.position);
+      onHide?.(id, position);
     }, 300);
   };
 
@@ -52,10 +64,10 @@ const Toast: React.FC<OToastProps> = (props) => {
     }, 50);
 
     let hideTimeout;
-    if (props.duration !== 0) {
+    if (duration !== 0) {
       hideTimeout = setTimeout(() => {
         handleHide();
-      }, props.duration);
+      }, duration);
     }
 
     return () => {
@@ -64,32 +76,34 @@ const Toast: React.FC<OToastProps> = (props) => {
         clearTimeout(hideTimeout);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (!props.show) {
+    if (!show) {
       handleHide();
     }
-  }, [props.show]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [show]);
 
-  const clickProps = props.onClick
+  const clickProps = onClick
     ? {
         tabIndex: 0,
-        onClick: props.onClick,
+        onClick: onClick,
         onKeyPress: (e: any) => {
           if (e.keyCode === 13) {
-            props.onClick?.(e);
+            onClick?.(e);
           }
         },
       }
     : {};
 
   return (
-    <div role={props.role} className={className} style={style} {...clickProps}>
-      {props.renderIcon ? props.renderIcon() : <CurrentIcon />}
-      <div className={props.heading ? 'ot-text-group-heading' : 'ot-text-group'}>
-        {props.heading && <h4 className="ot-heading">{props.heading}</h4>}
-        <div className="ot-text">{props.message}</div>
+    <div role={role} className={className} style={style} {...clickProps}>
+      {renderIcon ? renderIcon() : <CurrentIcon />}
+      <div className={heading ? 'ct-text-group-heading' : 'ct-text-group'}>
+        {heading && <h4 className="ct-heading">{heading}</h4>}
+        <div className="ct-text">{message}</div>
       </div>
     </div>
   );
@@ -99,9 +113,9 @@ Toast.propTypes = {
   show: bool.isRequired,
   id: number.isRequired,
   message: oneOfType([string, node]).isRequired,
-  type: oneOf<OTType>(['success', 'warn', 'info', 'error', 'loading']),
+  type: oneOf<CTType>(['success', 'warn', 'info', 'error', 'loading']),
   duration: number,
-  position: oneOf<OTPosition>(['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right']),
+  position: oneOf<CTPosition>(['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right']),
   role: string,
   heading: string,
   renderIcon: func,

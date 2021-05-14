@@ -5,6 +5,10 @@
   min-height: 100vh;
 }
 
+h3 {
+  margin: 5px 12px;
+}
+
 section {
   flex: 1;
 }
