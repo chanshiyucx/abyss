@@ -53,10 +53,14 @@
         // 本行2015-05-20新增，mac Safari下，貌似auto也会触发transition, 故要none下~
         element.style.transition = "none";
 
+        // 设置 auto 后，下面 targetHeight 获取的才是新的高度
         element.style.height = "auto";
         var targetHeight = window.getComputedStyle(element).height;
         element.style.height = height;
+
+        // 下面这句不能删，不然没有动画效果
         element.offsetWidth = element.offsetWidth;
+        // 或者直接这样写也是可以的： element.offsetWidth;
 
         //如果 transition time 写在CSS中的，time参数可以不要
         if (time) element.style.transition = "height " + time + "ms";
