@@ -15,3 +15,7 @@
 ## 容器高度动态变化动画
 
 - [容器高度动态变化动画](https://chanshiyu.com/abyss/demo/fun-transition-height/)
+
+## 页面滚动条出现时不跳动
+
+- [页面滚动条出现时不跳动](https://chanshiyu.com/abyss/demo/scrollbar/)

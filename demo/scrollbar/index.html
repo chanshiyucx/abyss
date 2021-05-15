@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS 结局页面滚动条出现时不跳动</title>
+    <style>
+      /* https://www.zhangxinxu.com/wordpress/2015/01/css-page-scrollbar-toggle-center-no-jumping/ */
+      /* ==================  1. 高级方式  =================== */
+      html {
+        overflow-y: scroll;
+      }
+
+      :root {
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      :root body {
+        position: absolute;
+      }
+
+      body {
+        width: 100vw;
+        overflow: hidden;
+      }
+
+      /* =================================================== */
+
+      /* ===================== 2. 低级方式 ================== */
+      /* 在小屏时不做处理，只有大屏时加 margin */
+      /* @media screen and (min-width: 1150px) {
+        .demo {
+          margin-left: calc(100vw - 100%);
+        }
+      } */
+      /* ==================================================== */
+
+      .demo {
+        text-align: center;
+        overflow: hidden;
+        animation: scrollbar-toggle 2s infinite alternate;
+        background-color: #ddd;
+      }
+
+      h1 {
+        font-size: 16px;
+        line-height: 3;
+        text-align: center;
+      }
+
+      img {
+        margin-top: 50px;
+        width: 300px;
+      }
+
+      @keyframes scrollbar-toggle {
+        from {
+          height: 0vh;
+        }
+        to {
+          height: 100vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>页面出现滚动条的时候没有跳动晃动实例页面</h1>
+    <div class="demo">
+      <img src="./1.jpg" />
+      <p>我是一个不会晃动的安静的小天使！</p>
+    </div>
+  </body>
+</html>
