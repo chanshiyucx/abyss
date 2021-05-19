@@ -109,6 +109,7 @@ const Toast: React.FC<CToastProps> = ({
   );
 };
 
+// propTypes 可以省略
 Toast.propTypes = {
   show: bool.isRequired,
   id: number.isRequired,

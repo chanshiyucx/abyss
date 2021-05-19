@@ -1,7 +1,4 @@
 .App {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   min-height: 100vh;
 }
 
@@ -11,6 +8,7 @@ h3 {
 
 section {
   flex: 1;
+  margin-bottom: 20px;
 }
 
 section:nth-child(1) {

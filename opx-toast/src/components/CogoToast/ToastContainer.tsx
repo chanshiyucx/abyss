@@ -79,6 +79,7 @@ const ToastContainer: React.FC<CToastContainerProps> = ({ toast, hiddenID }) => 
   );
 };
 
+// propTypes 可以省略
 ToastContainer.propTypes = {
   toast: shape({}),
   hiddenID: number,
