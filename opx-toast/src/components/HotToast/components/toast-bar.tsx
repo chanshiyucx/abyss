@@ -65,6 +65,7 @@ const getPositionStyle = (position: ToastPosition, offset: number): React.CSSPro
 
 const getAnimationStyle = (position: ToastPosition, visible: boolean): React.CSSProperties => {
   const top = position.includes('top');
+  // factor 定义，新的变量名 GET
   const factor = top ? 1 : -1;
   return visible
     ? {

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      :root[theme="light"] {
+        --bg-color: #fcc;
+      }
+      :root[theme="dark"] {
+        --bg-color: #ccc;
+      }
+
+      html,
+      body {
+        background-color: var(--bg-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <button id="toggle-theme">更换主题</button>
+    </div>
+    <script>
+      const theme = localStorage.getItem("theme") ?? "light";
+      document.documentElement.setAttribute("theme", theme);
+
+      const toggleBtn = document.querySelector("#toggle-theme");
+      toggleBtn.addEventListener("click", (e) => {
+        console.log("Switching theme");
+        theme = theme === "light" ? "dark" : "light";
+        document.documentElement.setAttribute("theme", theme);
+      });
+    </script>
+  </body>
+</html>
