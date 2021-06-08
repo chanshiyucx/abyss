@@ -24,7 +24,7 @@
       <button id="toggle-theme">更换主题</button>
     </div>
     <script>
-      const theme = localStorage.getItem("theme") ?? "light";
+      let theme = localStorage.getItem("theme") ?? "light";
       document.documentElement.setAttribute("theme", theme);
 
       const toggleBtn = document.querySelector("#toggle-theme");
